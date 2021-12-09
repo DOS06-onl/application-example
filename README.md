@@ -1,2 +1,5 @@
 # application-example
-Repo containing some basic examples
+
+У нас есть приложение.
+Что нам с ним нужно сделать, чтобы мы могли смело его деплоить на прод?
+
