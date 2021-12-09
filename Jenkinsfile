@@ -17,7 +17,7 @@ pipeline{
         stage("Test (run and sanity)") {
             steps {
                 script {
-                    docker.image(DOCKER_IMAGE).inside {
+                    docker.image(DOCKER_IMAGE).withRun('-u 1:1') {
                         sh 'cat /opt/www/index.html'
                         sh '/usr/sbin/nginx -t'
                     }
