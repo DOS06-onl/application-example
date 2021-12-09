@@ -5,7 +5,7 @@ pipeline{
     stages{
         // CI
         stage("Code analysis") {
-            agent { docker { image "ghcr.io/hadolint/hadolint:latest" } }
+            agent { docker { image "github/super-linter:latest" } }
             steps {
                 hadolint Dockerfile
             }
