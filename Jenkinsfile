@@ -4,13 +4,9 @@ pipeline{
     }
     stages{
         // CI
-        stage("Code analysis") {
-            agent { docker { image "github/super-linter:latest" } }
-            steps {
-                hadolint Dockerfile
-            }
+        stage("Build") {
+            docker.build("ghcr.io/dos06-onl/application-example:${env.BUILD_ID}")
         }
-        // stage("Build") {}
         // stage("Test (run and sanity)") {}
         // stage("Docker registry push") {}
         // // CD
