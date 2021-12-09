@@ -5,7 +5,9 @@ pipeline{
     stages{
         // CI
         stage("Build") {
-            docker.build("ghcr.io/dos06-onl/application-example:${env.BUILD_ID}")
+            script {
+                docker.build("ghcr.io/dos06-onl/application-example:${env.BUILD_ID}")
+            }
         }
         // stage("Test (run and sanity)") {}
         // stage("Docker registry push") {}
