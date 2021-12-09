@@ -2,16 +2,28 @@ pipeline{
     agent {
         label "ssh"
     }
+    environment {
+        DOCKER_IMAGE = "ghcr.io/dos06-onl/application-example:${env.BUILD_ID}"
+    }
     stages{
         // CI
         stage("Build") {
             steps {
                 script {
-                    docker.build("ghcr.io/dos06-onl/application-example:${env.BUILD_ID}")
+                    docker.build(DOCKER_IMAGE)
                 }
             }
         }
-        // stage("Test (run and sanity)") {}
+        stage("Test (run and sanity)") {
+            steps {
+                script {
+                    docker.image(DOCKER_IMAGE).inside {
+                        sh 'cat /opt/www/index.html'
+                        sh '/usr/sbin/nginx -t'
+                    }
+                }
+            }
+        }
         // stage("Docker registry push") {}
         // // CD
         // stage("Staging deployment") {}
