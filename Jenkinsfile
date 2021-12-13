@@ -80,17 +80,17 @@ pipeline{
                     sh 'docker create -p 80:8080 --name service-green ${DOCKER_IMAGE}'
                     sh 'docker stop service-blue'
                     sh 'docker start service-green'
-                    sh 'curl http://localhost:81'
+                    sh 'curl http://localhost:80'
                 }
             }
             post {
                 success{
                     sh 'docker rm --force service-blue'
-                    sh 'docker create -p 8080:8080 --name service-blue ${DOCKER_IMAGE}'
+                    sh 'docker create -p 80:8080 --name service-blue ${DOCKER_IMAGE}'
                 }
                 failure{
                     sh 'docker stop service-green'
-                    sh 'docker stop service-blue'
+                    sh 'docker start service-blue'
                 }
             }
         }
