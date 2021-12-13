@@ -70,13 +70,13 @@ pipeline{
                 script {
                     docker.withRegistry('https://ghcr.io', 'github-registry-token') {
                         sh "docker pull ${DOCKER_IMAGE}"
+                        // For fresh environment
+                        echo "Creating green (and blue if needed) environments"
+                        sh "docker create -p 8080:8080 --name service-green ${DOCKER_IMAGE} || echo 'Container is already created'"
+                        sh "docker create -p 8080:8080 --name service-blue ${DOCKER_IMAGE} || echo 'Container is already created'"
+                        sh "docker run -d service-green"
                     }
                 }
-                // For fresh environment
-                echo "Creating green (and blue if needed) environments"
-                sh "docker create -d -p 8080:8080 --name service-green ${DOCKER_IMAGE} || echo 'Container is already created'"
-                sh "docker create -d -p 8080:8080 --name service-blue ${DOCKER_IMAGE} || echo 'Container is already created'"
-                sh "docker run service-green"
             }
         }
         // stage("Production testing") {}
