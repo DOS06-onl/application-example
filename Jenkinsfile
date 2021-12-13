@@ -59,8 +59,24 @@ pipeline{
                 sh 'curl http://localhost:8080'
             }
         }
-        // stage("Production approve") {}
-        // stage("Production deployment") {}
+        // Green - primary
+        // Blue - secondary
+        stage("Production deployment") {
+            agent {
+                label "production"
+            }
+            steps {
+                input 'Approve the deployment'
+                docker.withRegistry('https://ghcr.io', 'github-registry-token') {
+                    sh "docker pull ${DOCKER_IMAGE}"
+                    // For fresh environment
+                    echo "Creating green (and blue if needed) environments"
+                    sh "docker create -d -p 8080:8080 --name service-green ${DOCKER_IMAGE} || echo 'Container is already created'"
+                    sh "docker create -d -p 8080:8080 --name service-blue ${DOCKER_IMAGE} || echo 'Container is already created'"
+                    sh "docker run service-green"
+                }
+            }
+        }
         // stage("Production testing") {}
     }
     post{
