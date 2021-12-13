@@ -1,4 +1,5 @@
 pipeline{
+    agent any
     environment {
         DOCKER_IMAGE = "ghcr.io/dos06-onl/application-example:${env.BUILD_ID}"
     }
