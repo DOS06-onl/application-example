@@ -1,0 +1,159 @@
+credentials:
+  system:
+    domainCredentials:
+    - credentials:
+      - basicSSHUserPrivateKey:
+          description: "SSH key "
+          id: "ubuntu-ssh"
+          privateKeySource:
+            directEntry:
+              privateKey: "{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}"
+          scope: GLOBAL
+          username: "jenkins"
+jenkins:
+  agentProtocols:
+  - "JNLP4-connect"
+  - "Ping"
+  authorizationStrategy:
+    loggedInUsersCanDoAnything:
+      allowAnonymousRead: false
+  clouds:
+  - docker:
+      dockerApi:
+        connectTimeout: 60
+        dockerHost:
+          uri: "unix:///var/run/docker.sock"
+        readTimeout: 60
+      name: "docker"
+  crumbIssuer:
+    standard:
+      excludeClientIPFromCrumb: false
+  disableRememberMe: false
+  labelAtoms:
+  - name: "bar"
+  - name: "built-in"
+  - name: "foo"
+  - name: "ssh"
+  - name: "ssh-ubuntu-server"
+  markupFormatter: "plainText"
+  mode: EXCLUSIVE
+  myViewsTabBar: "standard"
+  nodes:
+  - permanent:
+      labelString: "ssh foo bar"
+      launcher:
+        ssh:
+          credentialsId: "ubuntu-ssh"
+          host: "172.31.36.8"
+          port: 22
+          sshHostKeyVerificationStrategy: "nonVerifyingKeyVerificationStrategy"
+      name: "ssh-ubuntu-server"
+      nodeDescription: "Static node "
+      numExecutors: 2
+      remoteFS: "/opt/jenkins"
+      retentionStrategy: "always"
+  numExecutors: 0
+  primaryView:
+    all:
+      name: "all"
+  projectNamingStrategy: "standard"
+  quietPeriod: 5
+  remotingSecurity:
+    enabled: true
+  scmCheckoutRetryCount: 0
+  securityRealm:
+    local:
+      allowsSignup: false
+      enableCaptcha: false
+      users:
+      - id: "admin"
+        name: "admin"
+        properties:
+        - "myView"
+        - preferredProvider:
+            providerId: "default"
+        - "timezone"
+        - mailer:
+            emailAddress: "admin@foo.faba"
+        - "apiToken"
+  slaveAgentPort: -1
+  updateCenter:
+    sites:
+    - id: "default"
+      url: "https://updates.jenkins.io/update-center.json"
+  views:
+  - all:
+      name: "all"
+  viewsTabBar: "standard"
+globalCredentialsConfiguration:
+  configuration:
+    providerFilter: "none"
+    typeFilter: "none"
+security:
+  apiToken:
+    creationOfLegacyTokenEnabled: false
+    tokenGenerationOnCreationEnabled: false
+    usageStatisticsEnabled: true
+  sSHD:
+    port: -1
+unclassified:
+  buildDiscarders:
+    configuredBuildDiscarders:
+    - "jobBuildDiscarder"
+  buildStepOperation:
+    enabled: false
+  email-ext:
+    adminRequiredForTemplateTesting: false
+    allowUnregisteredEnabled: false
+    charset: "UTF-8"
+    debugMode: false
+    defaultBody: |-
+      $PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS:
+
+      Check console output at $BUILD_URL to view the results.
+    defaultContentType: "text/plain"
+    defaultSubject: "$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS!"
+    defaultTriggerIds:
+    - "hudson.plugins.emailext.plugins.trigger.FailureTrigger"
+    maxAttachmentSize: -1
+    maxAttachmentSizeMb: -1
+    precedenceBulk: false
+    watchingEnabled: false
+  fingerprints:
+    fingerprintCleanupDisabled: false
+    storage: "file"
+  gitHubConfiguration:
+    apiRateLimitChecker: ThrottleForNormalize
+  gitHubPluginConfig:
+    hookUrl: "http://54.87.57.2:8080/github-webhook/"
+  gitSCM:
+    addGitTagAction: false
+    allowSecondFetch: false
+    createAccountBasedOnEmail: false
+    disableGitToolChooser: false
+    hideCredentials: false
+    showEntireCommitSummaryInChanges: false
+    useExistingAccountWithSameEmail: false
+  junitTestResultStorage:
+    storage: "file"
+  location:
+    adminAddress: "адрес еще не настроен <nobody@nowhere>"
+    url: "http://54.87.57.2:8080/"
+  mailer:
+    charset: "UTF-8"
+    useSsl: false
+    useTls: false
+  pollSCM:
+    pollingThreadCount: 10
+  timestamper:
+    allPipelines: false
+    elapsedTimeFormat: "'<b>'HH:mm:ss.S'</b> '"
+    systemTimeFormat: "'<b>'HH:mm:ss'</b> '"
+tool:
+  git:
+    installations:
+    - home: "git"
+      name: "Default"
+  mavenGlobalConfig:
+    globalSettingsProvider: "standard"
+    settingsProvider: "standard"
