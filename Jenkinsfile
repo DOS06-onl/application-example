@@ -11,29 +11,54 @@ pipeline{
                     docker.build(DOCKER_IMAGE)
                 }
             }
-            post{
+            post {
                 failure{
                     echo "do something"
                 }
             }
         }
         stage("Test (run and sanity)") {
-            agent {
-                docker {
-                    image DOCKER_IMAGE 
-                    args '-u 1:1'
+            steps {
+                script {
+                    docker.image(DOCKER_IMAGE).withRun('-p 8000:8080') {
+                        sh 'curl http://localhost:8000'
+                    }
                 }
             }
+        }
+        stage("Docker registry push") {
             steps {
-                sh 'id'
-                sh 'cat /opt/www/index.html'
-                sh '/usr/sbin/nginx -t'
+                script {
+                    docker.withRegistry('https://ghcr.io', 'github-registry-token') {
+                        def image = docker.build(DOCKER_IMAGE)
+                        image.push()
+                    }
+                }
             }
         }
-        // stage("Docker registry push") {}
-        // // CD
-        // stage("Staging deployment") {}
-        // stage("Staging testing") {}
+        // CD
+        stage("Staging deployment") {
+            agent {
+                label "staging"
+            }
+            steps {
+                script {
+                    docker.withRegistry('https://ghcr.io', 'github-registry-token') {
+                        sh "docker pull ${DOCKER_IMAGE}"
+                        sh "docker rm --force service"
+                        sh "docker run -d -p 8080:8080 --name service ${DOCKER_IMAGE}"
+                    }
+                }
+            }
+        }
+        stage("Staging testing") {
+            agent {
+                label "staging"
+            }
+            steps {
+                sh 'curl http://localhost:8080'
+            }
+        }
         // stage("Production approve") {}
         // stage("Production deployment") {}
         // stage("Production testing") {}
