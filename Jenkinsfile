@@ -19,7 +19,10 @@ pipeline{
         }
         stage("Test (run and sanity)") {
             agent {
-                docker { image DOCKER_IMAGE }
+                docker {
+                    image DOCKER_IMAGE 
+                    args '-u 1:1'
+                }
             }
             steps {
                 sh 'id'
