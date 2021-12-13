@@ -72,14 +72,28 @@ pipeline{
                         sh "docker pull ${DOCKER_IMAGE}"
                         // For fresh environment
                         echo "Creating green (and blue if needed) environments"
-                        sh "docker create -p 8080:8080 --name service-green ${DOCKER_IMAGE} || echo 'Container is already created'"
-                        sh "docker create -p 8080:8080 --name service-blue ${DOCKER_IMAGE} || echo 'Container is already created'"
-                        sh "docker run -d service-green"
+                        sh "docker create -p 80:8080 --name service-green ${DOCKER_IMAGE} || echo 'Container is already created'"
+                        sh "docker create -p 80:8080 --name service-blue ${DOCKER_IMAGE} && docker start service-green || echo 'Container is already created'"
                     }
+                    sh 'docker rm --force service-green'
+                    sh 'docker start service-blue'
+                    sh 'docker create -p 80:8080 --name service-green ${DOCKER_IMAGE}'
+                    sh 'docker stop service-blue'
+                    sh 'docker start service-green'
+                    sh 'curl http://localhost:80'
+                }
+            }
+            post {
+                success{
+                    sh 'docker rm --force service-blue'
+                    sh 'docker create -p 8080:8080 --name service-blue ${DOCKER_IMAGE}'
+                }
+                failure{
+                    sh 'docker stop service-green'
+                    sh 'docker stop service-blue'
                 }
             }
         }
-        // stage("Production testing") {}
     }
     post{
         always{
